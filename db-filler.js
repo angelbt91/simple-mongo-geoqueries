@@ -2,7 +2,7 @@ const fetch = require('node-fetch'),
     City = require('./city.model'),
     parseString = require('xml2js').parseString,
     mongoose = require('mongoose'),
-    MAX_CITIES = 20,
+    MAX_CITIES = 100,
     citiesData = [];
 
 // Connect to Mongo
@@ -22,7 +22,7 @@ for (let i = 0; i < MAX_CITIES; i++) {
         .then(response => response.text())
         .then(xml => {
             parseString(xml, function (err, result) {
-                const data = result.geodata.nearest[0];
+                const data = result.geodata.major[0];
 
                 citiesData.push({
                     name: data.city[0],
