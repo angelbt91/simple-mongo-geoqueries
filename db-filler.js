@@ -43,9 +43,9 @@ for (let i = 0; i < MAX_CITIES; i++) {
                     // Save all the Images in the array with insertMany()
                     City.insertMany(cities, (err, result) => {
                         if (err) {
-                            return console.log("Error when filling database:", err);
+                            return console.log('Error when filling database:', err);
                         } else {
-                            return console.log("Database filled:", result);
+                            return console.log('Database filled:', result);
                         }
                     });
                 }

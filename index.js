@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
             $near: {
                 $maxDistance: distance,
                 $geometry: {
-                    type: "Point",
+                    type: `Point`,
                     coordinates: [long, lat]
                 }
             }

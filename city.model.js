@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CitySchema = new Schema({
@@ -9,8 +9,8 @@ const CitySchema = new Schema({
     }
 });
 
-CitySchema.index({location: "2dsphere"});
+CitySchema.index({location: '2dsphere'});
 
-const City = mongoose.model("City", CitySchema);
+const City = mongoose.model('City', CitySchema);
 
 module.exports = City;
