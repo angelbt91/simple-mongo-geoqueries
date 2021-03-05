@@ -1,6 +1,10 @@
 # Simple Mongo Geoqueries
 
-## Running
+## Usage
+
+Make a GET request to `/` with `lat`, `long` and `distance` query parameters to receive back a JSON with the cities on your database that are inside the area specified.
+
+## Installing
 
 Install dependencies:
 
