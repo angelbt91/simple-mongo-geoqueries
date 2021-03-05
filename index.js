@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
                 }
             }
         }
-    }).find((error, results) => {
+    }, (error, results) => {
         if (error) {
             return res.status(400).send(error);
         }
