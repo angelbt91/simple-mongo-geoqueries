@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+      - db-fill
+    ports:
+      - '3000:3000'
+
+  db-fill:
+    build:
+      context: .
+    depends_on:
+      - db
+    command: 'npm run fill'
+
+  db:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:

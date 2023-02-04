@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CitySchema = new Schema({
-    name: String,
-    location: {
-        type: {type: String},
-        coordinates: []
-    }
+  name: String,
+  location: {
+    type: {type: String},
+    coordinates: []
+  }
 });
 
 CitySchema.index({location: '2dsphere'});

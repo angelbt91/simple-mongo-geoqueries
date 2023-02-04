@@ -4,20 +4,24 @@
 
 Make a GET request to `/` with `lat`, `long` and `distance` query parameters to receive back a JSON with the cities on your database that are inside the area specified.
 
-## Installing
+## Running
 
-Install dependencies:
+First, make sure `docker-compose` is installed in your system.
 
-`$ npm install`
+The, start the app by running:
 
-Start Mongodb with Docker:
+```bash
+$ docker-compose up -d
+```
 
-`$ sudo docker run -it -p 27017:27017 --name geoqueries-mongodb -d mongo`
+Whenever you are done, stop the app by running:
 
-Fill database with cities:
+```bash
+$ docker-compose stop
+```
 
-`$ npm run fill`
+If you are not going to run the app anymore, remove it by running:
 
-Start local server:
-
-`$ npm start`
+```bash
+$ docker-compose down
+```
