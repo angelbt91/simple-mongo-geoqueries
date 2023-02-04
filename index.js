@@ -11,31 +11,38 @@ const express = require('express'),
     useFindAndModify: false,
     useCreateIndex: true
   });
-})()
+})();
 
 // Reads requests with 'long', 'lat' and 'distance' query params and returns close cities
-app.get('/', (req, res) => {
-  const long = req.query.long,
-    lat = req.query.lat,
-    distance = req.query.distance;
+app.get('/', async (req, res) => {
+  const { long, lat, distance } = req.query;
 
-  City.find({
-    location: {
-      $near: {
-        $maxDistance: distance,
-        $geometry: {
-          type: `Point`,
-          coordinates: [long, lat]
+  const someParamIsMissing = [long, lat, distance].includes(undefined);
+  if (someParamIsMissing) {
+    return res.status(400).json({error: 'Include "long", "lat" and "distance" query params'});
+  }
+  const { limit, page, order } = req.query;
+
+  try {
+    const results = await City.find({
+      location: {
+        $near: {
+          $maxDistance: distance,
+          $geometry: {
+            type: `Point`,
+            coordinates: [long, lat]
+          }
         }
       }
-    }
-  }, (error, results) => {
-    if (error) {
-      return res.status(400).send(error);
-    }
+    })
+      .skip(limit * page)
+      .sort({ name: order === 'asc' ? -1 : 1 })
+      .limit(Number(limit));
 
     return res.status(200).json(results);
-  });
+  } catch (error) {
+    return res.status(400).send(error);
+  }
 });
 
 app.listen('3000', () => {
